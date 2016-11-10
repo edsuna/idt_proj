@@ -1,4 +1,5 @@
 from behave import *
+from time import sleep
 
 
 @step("that I am using a browser")
@@ -25,7 +26,22 @@ def step_impl(context, expected, selector):
     assert found, "Didn't find text {}".format(expected)
 
 
-@step('There should be "{num}" "{selector}"')
-def step_impl(context, num, selector):
+@step('There should be "{expected}" "{selector}"')
+def step_impl(context, expected, selector):
+    num = int(expected)
     elements = context.browser.find_by_css(selector)
-    assert len(elements) == int(num)
+    num_elements = len(elements)
+    assert num_elements == num, "Expected {} but got {}".format(num, num_elements)
+
+
+@step('I wait for "{selector}"')
+def step_impl(context, selector):
+    i = 0
+    while i < 10:
+        try:
+            elem = context.browser.find_by_css(selector)
+            return
+        except:
+            i = i+1
+            sleep(0.1)
+    assert False, 'Failed to find {}'.format(selector)

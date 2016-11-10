@@ -8,4 +8,5 @@ Feature: IDT Test Project
     Scenario: Display list of states
         When I visit "/"
         Then I should see "States" in "h2"
-        And There should be "50" "#states div"
+        And I wait for "#states_done"
+        And There should be "51" "#states_list div"

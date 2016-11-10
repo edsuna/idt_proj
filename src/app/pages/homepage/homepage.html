@@ -1,8 +1,14 @@
 <main>
     <h1 class="title">IDT Test Project</h1>
     <h2>States</h2>
+    <div ng-if="hpCtrl.statesDone" id="states_done">
+        States Done
+    </div>
     <div class="col-md-12">
         <div class="col-md-4" id="states_list">
+            <div ng-repeat="state in hpCtrl.statesList">
+                {{ state.state }}
+            </div>
 
         </div>
         <div class="col-md-8" id="state_details">
@@ -13,3 +19,4 @@
 <footer>
     David Suna
 </footer>
+
