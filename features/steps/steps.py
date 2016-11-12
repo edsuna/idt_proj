@@ -20,7 +20,7 @@ def step_impl(context, expected, selector):
     elements = context.browser.find_by_css(selector)
     found = False
     for elem in elements:
-        if expected == elem.text:
+        if expected in elem.text:
             found = True
             break
     assert found, "Didn't find text {}".format(expected)
@@ -45,3 +45,15 @@ def step_impl(context, selector):
             i = i+1
             sleep(0.1)
     assert False, 'Failed to find {}'.format(selector)
+
+
+@when('I click "{selector}"')
+def step_impl(context, selector):
+    elem = context.browser.find_by_css(selector)
+    elem.click()
+
+
+@when('I double click "{selector}"')
+def step_impl(context, selector):
+    elem = context.browser.find_by_css(selector)
+    elem.double_click()

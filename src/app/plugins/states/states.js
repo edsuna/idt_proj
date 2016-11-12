@@ -17,10 +17,17 @@ export default class States {
         this.$http = $http;
     }
 
-    getStates() {
+    GetStates() {
         return this.$http({
             method: 'GET',
             url: 'http://pos.idtretailsolutions.com/countytest/states'
+        });
+    }
+    
+    GetCounties(url) {
+        return this.$http({
+            method: 'GET',
+            url: url
         });
     }
 }

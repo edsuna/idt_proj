@@ -1,18 +1,32 @@
 <main>
     <h1 class="title">IDT Test Project</h1>
     <h2>States</h2>
-    <div ng-if="hpCtrl.statesDone" id="states_done">
-        States Done
+    <div ng-if="hpCtrl.loaded" id="states_done">
     </div>
     <div class="col-md-12">
-        <div class="col-md-4" id="states_list">
-            <div ng-repeat="state in hpCtrl.statesList">
+        <div class="col-md-4 states-list" id="states_list1">
+            <div ng-repeat="state in hpCtrl.statesList" id="state{{ $index }}"
+                 ng-class="{'state-selected': state.selected}"
+                 class="state"
+                 ng-dblclick="hpCtrl.ToggleSelect($index)"
+                 ng-click="$evalAsync(hpCtrl.ShowStateInfo($index))">
                 {{ state.state }}
             </div>
 
         </div>
         <div class="col-md-8" id="state_details">
-
+            <div ng-if="hpCtrl.selectedState">
+                <h3>{{ hpCtrl.selectedState.state }}</h3>
+                <h4 id="population" ng-class="{'population-mismatch': !hpCtrl.populationMatch}">
+                    Population: {{ hpCtrl.selectedState.population}}
+                </h4>
+                <h4 id="counties">Number of Counties: {{ hpCtrl.selectedState.counties}}</h4>
+                <div class="counties-list">
+                    <div ng-repeat="county in hpCtrl.countiesList">
+                        {{ county.county }}: Population - {{ county.population }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </main>
