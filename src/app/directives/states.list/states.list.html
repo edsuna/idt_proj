@@ -1,13 +1,18 @@
     <h2>{{ statesListCtrl.title }}</h2>
     <div ng-if="statesListCtrl.loaded" id="states_done">
     </div>
+
+    <div ng-if="statesListCtrl.showFilter">
+        <input ng-model="statesListCtrl.statesFilter">
+    </div>
     <div class="col-md-12">
         <div class="col-md-4 states-list" id="{{ statesListCtrl.baseId }}">
-            <div ng-repeat="state in statesListCtrl.statesList" id="{{ statesListCtrl.baseId }}{{ $index }}"
+            <div ng-repeat="state in statesListCtrl.statesList | filter:{state: statesListCtrl.statesFilter}"
+                 id="{{ statesListCtrl.baseId }}{{ $index }}"
                  ng-class="{'state-selected': state.selected}"
                  class="state"
-                 ng-dblclick="statesListCtrl.ToggleSelect($index)"
-                 ng-click="$evalAsync(statesListCtrl.ShowStateInfo($index))">
+                 ng-dblclick="statesListCtrl.ToggleSelect(state.state)"
+                 ng-click="$evalAsync(statesListCtrl.ShowStateInfo(state.state))">
                 {{ state.state }}
             </div>
 

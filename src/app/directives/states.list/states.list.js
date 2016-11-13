@@ -7,6 +7,7 @@ export default function StatesListDirective () {
         bindToController: {
             'title': '@',
             'baseId': '@',
+            'showFilter': '@',
         },
     }
 }
@@ -19,6 +20,7 @@ class StatesListController {
         this.selectedState = null;
         this.loaded = false;
         this.populationMatch = true;
+        this.statesFilter = '';
 
         this.statesInfo.GetStates().then((ret) => {
             this.statesList = ret.data.data;
@@ -29,7 +31,19 @@ class StatesListController {
         });
     }
 
-    ShowStateInfo(numState) {
+    FindState(stateName) {
+        var index = -1;
+        for (var i = 0; i < this.statesList.length; i++) {
+            if (this.statesList[i].state == stateName) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    ShowStateInfo(stateName) {
+        var numState = this.FindState(stateName);
         this.selectedState = this.statesList[numState];
         this.statesInfo.GetCounties(this.statesList[numState].detail).then((ret) => {
             this.countiesList = ret.data.data;
@@ -41,7 +55,8 @@ class StatesListController {
         });
     }
 
-    ToggleSelect(numState) {
+    ToggleSelect(stateName) {
+        var numState = this.FindState(stateName);
         this.statesList[numState].selected = !this.statesList[numState].selected;
     }
 }
