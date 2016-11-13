@@ -12,7 +12,7 @@
 //
 // States.$inject = ['Restangular'];
 
-export default class States {
+export default class StatesInfo {
     constructor($http) {
         this.$http = $http;
     }
@@ -31,3 +31,5 @@ export default class States {
         });
     }
 }
+
+StatesInfo.$inject = ['$http'];

@@ -45,8 +45,8 @@ class StatesListController {
     ShowStateInfo(stateName) {
         var numState = this.FindState(stateName);
         this.selectedState = this.statesList[numState];
-        this.computedPopulation = 0;
         this.statesInfo.GetCounties(this.statesList[numState].detail).then((ret) => {
+            this.computedPopulation = 0;
             this.countiesList = ret.data.data;
             this.countiesList.map((item) => {
                 this.computedPopulation += item.population;
