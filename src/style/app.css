@@ -36,6 +36,10 @@ main {
     overflow-y: auto;
 }
 
+.population:not(.population-mismatch):after {
+    content:  "\2713 ";
+}
+
 .population-mismatch {
 
 }

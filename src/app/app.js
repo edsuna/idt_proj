@@ -15,9 +15,11 @@ import homepage from './pages/homepage';
 
 import statesInfo from './plugins/states';
 
+import statesList from './directives/states.list';
+
 const MODULE_NAME = 'app';
 
-angular.module(MODULE_NAME, [uirouter, restangular, homepage, statesInfo])
+angular.module(MODULE_NAME, [uirouter, restangular, homepage, statesInfo, statesList])
     .config(routing);
 
 export default MODULE_NAME;
