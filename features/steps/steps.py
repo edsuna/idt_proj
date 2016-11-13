@@ -57,3 +57,14 @@ def step_impl(context, selector):
 def step_impl(context, selector):
     elem = context.browser.find_by_css(selector)
     elem.double_click()
+
+
+@when('I enter "{text}" into "{selector}"')
+def step_impl(context, text, selector):
+    elem = context.browser.find_by_css(selector)
+    elem.type(text)
+
+
+@step('I wait "{num}" seconds')
+def step_impl(context, num):
+    sleep(int(num))

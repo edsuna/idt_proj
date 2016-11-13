@@ -3,12 +3,12 @@
     </div>
 
     <div ng-if="statesListCtrl.showFilter">
-        <input ng-model="statesListCtrl.statesFilter">
+        <input ng-model="statesListCtrl.statesFilter" id="{{ statesListCtrl.baseId }}_filter">
     </div>
     <div class="col-md-12">
         <div class="col-md-4 states-list" id="{{ statesListCtrl.baseId }}">
             <div ng-repeat="state in statesListCtrl.statesList | filter:{state: statesListCtrl.statesFilter}"
-                 id="{{ statesListCtrl.baseId }}{{ $index }}"
+                 id="{{ statesListCtrl.baseId }}_{{ $index }}"
                  ng-class="{'state-selected': state.selected}"
                  class="state"
                  ng-dblclick="statesListCtrl.ToggleSelect(state.state)"
@@ -18,10 +18,13 @@
 
         </div>
         <div class="col-md-8">
-            <div ng-if="statesListCtrl.selectedState">
+            <div ng-if="statesListCtrl.selectedState" id="{{ statesListCtrl.baseId }}_details">
                 <h3>{{ statesListCtrl.selectedState.state }}</h3>
                 <h4 class="population" ng-class="{'population-mismatch': !statesListCtrl.populationMatch}">
                     Population: {{ statesListCtrl.selectedState.population}}
+                </h4>
+                <h4 class="population" ng-class="{'population-mismatch': !statesListCtrl.populationMatch}">
+                    Computed Population: {{ statesListCtrl.computedPopulation}}
                 </h4>
                 <h4 class="counties">Number of Counties: {{ statesListCtrl.selectedState.counties}}</h4>
                 <div class="counties-list">

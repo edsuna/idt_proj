@@ -45,13 +45,13 @@ class StatesListController {
     ShowStateInfo(stateName) {
         var numState = this.FindState(stateName);
         this.selectedState = this.statesList[numState];
+        this.computedPopulation = 0;
         this.statesInfo.GetCounties(this.statesList[numState].detail).then((ret) => {
             this.countiesList = ret.data.data;
-            var populationTotal = 0;
             this.countiesList.map((item) => {
-                populationTotal += item.population;
+                this.computedPopulation += item.population;
             });
-            this.populationMatch = (this.statesList[numState].population == populationTotal);
+            this.populationMatch = (this.statesList[numState].population == this.computedPopulation);
         });
     }
 
